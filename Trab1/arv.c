@@ -58,21 +58,21 @@ int fator(arv **p, int a) {
 int avl(arv **p) {
     int num;
     if((*p) != NULL){
-            num = procFator(&(*p));
-            if(num < -1 || num > 1) return -1;
-            return avl(&(*p)->esq); 
-            return avl(&(*p)->dir);
-        }
+        num = procFator(&(*p));
+        if(num < -1 || num > 1) return -1;
+        return avl(&(*p)->esq); 
+        return avl(&(*p)->dir);
+    }
     return 1;
 }
 
 int balan(arv **p) {
     int num;
     if((*p) != NULL){
-            num = procFator(&(*p));
-            if(num>0 || num <0) return -1;
-            return balan(&(*p)->esq); 
-            return balan(&(*p)->dir);
-        }
+        num = procFator(&(*p));
+        if(num>0 || num <0) return -1;
+        return balan(&(*p)->esq); 
+        return balan(&(*p)->dir);
+    }
     return 1;
 }
