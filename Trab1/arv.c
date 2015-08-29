@@ -2,6 +2,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+void destruirArv(arv **p) {
+    if(!(*p)) return;
+    destruirArv(&(*p)->esq);
+    destruirArv(&(*p)->dir);
+    free(*p);
+}
+
 void print(arv **p) {
     if(!(*p)) return;
     printf("%d\n",(*p)->n);
@@ -28,14 +35,14 @@ arv* procElem(arv **p ,int a) {
     return procElem(&(*p)->dir, a);
 }
 
-int alt (arv **p) {
+int alt(arv **p) {
     int esquerda,direita;
-    if ((*p) == NULL) return -1;
+    if((*p) == NULL) return -1;
     else {
         esquerda = alt(&(*p)->esq);
         direita = alt(&(*p)->dir);
         if(direita > esquerda) return direita+1;
-        else return esquerda+1;
+        return esquerda+1;
     }
 }
 
@@ -56,23 +63,21 @@ int fator(arv **p, int a) {
 }
 
 int avl(arv **p) {
-    int num;
-    if((*p) != NULL){
-        num = procFator(&(*p));
-        if(num < -1 || num > 1) return -1;
-        return avl(&(*p)->esq); 
-        return avl(&(*p)->dir);
-    }
-    return 1;
+    int esq, dir;
+    if(!(*p)) return 1;
+    esq = alt(&(*p)->esq);
+    dir = alt(&(*p)->dir);
+    if(abs(esq - dir) == 1 && avl(&(*p)->esq) && avl(&(*p)->dir))
+        return 1; //É avl
+    return 0; //Não é avl
 }
 
 int balan(arv **p) {
-    int num;
-    if((*p) != NULL){
-        num = procFator(&(*p));
-        if(num>0 || num <0) return -1;
-        return balan(&(*p)->esq); 
-        return balan(&(*p)->dir);
-    }
-    return 1;
+    int esq, dir;
+    if(!(*p)) return 1;
+    esq = alt(&(*p)->esq);
+    dir = alt(&(*p)->dir);
+    if(abs(esq - dir) <= 1 && balan(&(*p)->esq) && balan(&(*p)->dir))
+        return 1; //Está balanceada
+    return 0; //Não está balanceada
 }
