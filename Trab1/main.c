@@ -2,18 +2,14 @@
 #include"arv.h"
 
 int main(void){
-    int n;
     arv* arvore_a = criar_arvore(arvore_a);
-    insereArv(&arvore_a, 23);
-    insereArv(&arvore_a, 13);
-    insereArv(&arvore_a, 40);
-    insereArv(&arvore_a, 12);
-    insereArv(&arvore_a, 60);
-    insereArv(&arvore_a, 42);
+    int V[] = {42, 15, 88, 6, 27, 63, 94, 20, 57, 71}, i;
+    for(i = 0; i < 10; i++) insereArv(&arvore_a, V[i]);
     printf("%s\n", avl(&arvore_a) ? "Eh avl" : "Nao eh avl");
     printf("%s\n", balan(&arvore_a) ? "Esta balanceada" : "Nao esta balanceada");
-    n=fator(&arvore_a, 23);
-    printf("Fator = %d\n",n);
+    for(i = 0; i < 10; i++)
+        printf("Fator %d = %d\n", V[i], fator(&arvore_a, V[i]));
+    printf("\n\n ARVORE \n\n");
     print(&arvore_a);
     destruirArv(&arvore_a);
     return 0;

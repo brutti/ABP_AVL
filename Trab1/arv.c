@@ -63,11 +63,13 @@ int fator(arv **p, int a) {
 }
 
 int avl(arv **p) {
-    int esq, dir;
+    int esq, dir, diferenca;
     if(!(*p)) return 1;
     esq = alt(&(*p)->esq);
     dir = alt(&(*p)->dir);
-    if(abs(esq - dir) == 1 && avl(&(*p)->esq) && avl(&(*p)->dir))
+    diferenca = abs(esq - dir);
+    if((diferenca == 1 || diferenca == 0) && avl(&(*p)->esq) && 
+                                                        avl(&(*p)->dir))
         return 1; //É avl
     return 0; //Não é avl
 }
@@ -77,7 +79,7 @@ int balan(arv **p) {
     if(!(*p)) return 1;
     esq = alt(&(*p)->esq);
     dir = alt(&(*p)->dir);
-    if(abs(esq - dir) <= 1 && balan(&(*p)->esq) && balan(&(*p)->dir))
+    if(!abs(esq - dir) && balan(&(*p)->esq) && balan(&(*p)->dir))
         return 1; //Está balanceada
     return 0; //Não está balanceada
 }
