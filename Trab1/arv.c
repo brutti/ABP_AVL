@@ -41,8 +41,8 @@ int alt(arv **p) {
     else {
         esquerda = alt(&(*p)->esq);
         direita = alt(&(*p)->dir);
-        if(direita > esquerda) return direita+1;
-        return esquerda+1;
+        if(direita > esquerda) return direita + 1;
+        return esquerda + 1;
     }
 }
 
