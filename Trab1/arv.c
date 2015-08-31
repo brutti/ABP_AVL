@@ -1,3 +1,7 @@
+/*
+ * Jefferson Coppini, Nicholas Brutti
+ * G1Trab - Estrutura de Dados II - UFFS 2015/2
+ */
 #include"arv.h"
 #include<stdio.h>
 #include<stdlib.h>
@@ -17,15 +21,13 @@ void print(arv **p) {
 }
 
 void insereArv(arv **p, int a) {
-   if(*p == NULL) {
+   if(!(*p)) {
        *p = (arv *) malloc(sizeof(arv));
        (*p)->n = a;
        (*p)->esq = (*p)->dir = NULL;
    }
-   else {
-       if(a < (*p)->n) insereArv(&(*p)->esq,a);
-       if(a > (*p)->n) insereArv(&(*p)->dir,a);
-   }
+   if(a < (*p)->n) insereArv(&(*p)->esq,a);
+   if(a > (*p)->n) insereArv(&(*p)->dir,a);
 }
 
 arv* procElem(arv **p ,int a) {
@@ -38,28 +40,25 @@ arv* procElem(arv **p ,int a) {
 int alt(arv **p) {
     int esquerda,direita;
     if((*p) == NULL) return -1;
-    else {
-        esquerda = alt(&(*p)->esq);
-        direita = alt(&(*p)->dir);
-        if(direita > esquerda) return direita + 1;
-        return esquerda + 1;
-    }
+    esquerda = alt(&(*p)->esq);
+    direita = alt(&(*p)->dir);
+    if(direita > esquerda) return direita + 1;
+    return esquerda + 1;
 }
 
 int procFator(arv **p) {
     if((*p)->esq && (*p)->dir) return alt(&(*p)->esq)-alt(&(*p)->dir);
     if(!(*p)->esq && (*p)->dir) return -1 -(alt(&(*p)->dir));
     if((*p)->esq && !(*p)->dir) return  1 + alt(&(*p)->esq);
-    else return 0;
+    return 0;
 }
 
-int fator(arv **p, int a) {
-    int i;
+int fator(arv **p, int a, int *found) {
     arv * aux = NULL;
     aux = procElem(&(*p),a);
-    if(!aux) return -2;
-    i = procFator(&aux);
-    return i;
+    if(!aux) return *found = 0;
+    *found = 1;
+    return procFator(&aux);
 }
 
 int avl(arv **p) {
