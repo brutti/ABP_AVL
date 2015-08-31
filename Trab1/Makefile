@@ -4,7 +4,7 @@ BINEXEC=a.out
 All: ${BINEXEC}
 
 ${BINEXEC}: arv.o main.c
-		gcc main.c arv.o ${FLAGS} -lm
+		gcc main.c arv.o ${FLAGS}
 
 arv.o: arv.c
 	gcc -c arv.c ${FLAGS}

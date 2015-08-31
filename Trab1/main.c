@@ -5,16 +5,16 @@ int main(void){
     arv* arvore_a;
     int n, f;
     criar_arvore(arvore_a);
-    insereArv(&arvore_a, 30);
     insereArv(&arvore_a, 20);
-    insereArv(&arvore_a, 50);
-    insereArv(&arvore_a, 10);
-    insereArv(&arvore_a, 25);
-    insereArv(&arvore_a, 32);
-    insereArv(&arvore_a, 54);
+    insereArv(&arvore_a, 15);
+    insereArv(&arvore_a, 24);
+    insereArv(&arvore_a, 11);
+    insereArv(&arvore_a, 18);
+    insereArv(&arvore_a, 37);
     printf("%s\n", avl(&arvore_a) ? "E avl" : "Nao e avl");
-    printf("%s\n", balan(&arvore_a) ? "Esta balanceada" : "Nao esta balanceada");
-    n = fator(&arvore_a, 50, &f);
+    printf("%s\n", balan(&arvore_a) ? "Esta completamente balanceada" : 
+                                      "Nao esta completamente balanceada");
+    n = fator(&arvore_a, 24, &f);
     if(f) printf("Fator = %d\n", n);
     else printf("Nao encontrado.\n");
     printf("Arvore:\n");
