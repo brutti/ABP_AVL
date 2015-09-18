@@ -1,4 +1,4 @@
-Trabalhos de Estrutura de Dados II - UFFS 2015/2
+Trabalho de Estrutura de Dados II - UFFS 2015/2
 
 Contém as seguintes funções:
 
